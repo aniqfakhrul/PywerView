@@ -2714,9 +2714,7 @@ async function fetchAndDisplayModalServices(computer) {
                 <td colspan="4" class="px-3 py-2">
                     <div class="animate-fade-in">
                         <div class="flex justify-center">
-                            <div class="w-6 h-6 animate-spin">
-                                <i class="fas fa-circle-notch"></i>
-                            </div>
+                            <i class="fas fa-circle-notch animate-spin"></i>
                         </div>
                     </div>
                 </td>
@@ -2837,7 +2835,7 @@ async function fetchAndDisplayModalServices(computer) {
                             const details = serviceDetails[0].attributes;
                             detailsRow.innerHTML = `
                                 <td class="details-row" colspan="4" class="px-3 py-2">
-                                    <form class="service-edit-form">
+                                    <form class="service-edit-form p-4">
                                         <div class="animate-fade-in space-y-4">
                                             <div class="grid grid-cols-2 gap-4 text-sm">
                                                 <div>
