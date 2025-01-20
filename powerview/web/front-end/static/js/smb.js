@@ -1164,7 +1164,7 @@ async function downloadSMBDirectory(computer, share, path, directoryName) {
             try {
                 const blob = await downloadSMBFile(computer, share, file.path, true);
                 if (blob) {
-                    zip.file(file.name, blob);
+                    zip.file(file.path, blob);
                 }
                 completedFiles++;
                 
