@@ -467,7 +467,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    async function searchComputers(no_cache = false) {
+    async function searchComputers(no_cache=false) {
         const searchSpinner = document.getElementById('search-spinner');
         const boxOverlaySpinner = document.getElementById('box-overlay-spinner');
         try {
@@ -501,7 +501,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    document.getElementById('computer-search-button').addEventListener('click', searchComputers);
+    document.getElementById('computer-search-button').addEventListener('click', () => searchComputers(false));
 
     // Show initial state
     const tbody = document.querySelector('#computers-result-table tbody');

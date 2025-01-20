@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        searchButton.addEventListener('click', searchUsers);
+        searchButton.addEventListener('click', () => searchUsers(false));
     }
 
     function renderActiveFilters() {

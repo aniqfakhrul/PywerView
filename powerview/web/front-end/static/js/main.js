@@ -2836,7 +2836,7 @@ async function fetchAndDisplayModalServices(computer) {
                         if (serviceDetails && serviceDetails[0]) {
                             const details = serviceDetails[0].attributes;
                             detailsRow.innerHTML = `
-                                <td colspan="4" class="px-3 py-2">
+                                <td class="details-row" colspan="4" class="px-3 py-2">
                                     <form class="service-edit-form">
                                         <div class="animate-fade-in space-y-4">
                                             <div class="grid grid-cols-2 gap-4 text-sm">
