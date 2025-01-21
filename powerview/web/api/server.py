@@ -478,27 +478,15 @@ class APIServer:
 			if not computer:
 				return jsonify({'error': 'Computer name/IP is required'}), 400
 
-			# Reuse get_netshare logic for connection
-			is_fqdn = False
-			host = ""
-
-			if not is_ipaddress(computer):
-				is_fqdn = True
-				if not is_valid_fqdn(computer):
-					host = f"{computer}.{self.powerview.domain}"
-				else:
-					host = computer
-				logging.debug(f"[SMB Connect] Using FQDN: {host}")
-			else:
-				host = computer
-
 			if self.powerview.use_kerberos:
 				if is_ipaddress(computer):
 					return jsonify({'error': 'FQDN must be used for kerberos authentication'}), 400
 			else:
-				if is_fqdn:
-					host = host2ip(host, self.powerview.nameserver, 3, True, 
+				if is_valid_fqdn(computer):
+					host = host2ip(computer, self.powerview.nameserver, 3, True, 
 												use_system_ns=self.powerview.use_system_nameserver)
+				else:
+					host = computer
 
 			if not host:
 				return jsonify({'error': 'Host not found'}), 404
@@ -698,6 +686,7 @@ class APIServer:
 
 			client = self.smb_sessions[computer]
 			smb_client = SMBClient(client)
+
 			content = smb_client.cat(share, path)
 			if content is None:
 				return jsonify({'error': 'Failed to read file content'}), 500

@@ -356,12 +356,12 @@ async function listSMBPath(computer, share, path = '') {
 
 
 function buildSMBTreeView(shares, computer) {
-    let html = '<ul>';
+    let html = '<ul class="space-y-0">'; // Remove spacing between items
     shares.forEach(share => {
         const shareName = share.attributes.Name;
         html += `
             <li class="smb-tree-item" data-share="${shareName}" data-computer="${computer}">
-                <div class="grid grid-cols-12 gap-4 items-center hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded cursor-pointer py-0.5 px-2">
+                <div class="grid grid-cols-12 gap-4 items-center hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded cursor-pointer">
                     <div class="col-span-6">
                         <div class="flex items-center gap-2 min-w-0">
                             <span class="text-yellow-500 flex-shrink-0">${icons.smbshareIcon}</span>
@@ -375,7 +375,7 @@ function buildSMBTreeView(shares, computer) {
                     <div class="col-span-2 text-sm text-neutral-500 dark:text-neutral-400">--</div>
                     <div class="col-span-1 text-sm text-neutral-500 dark:text-neutral-400 text-right">--</div>
                 </div>
-                <ul class="hidden"></ul>
+                <ul class="hidden space-y-0"></ul>
             </li>
         `;
     });
@@ -733,7 +733,7 @@ function failDownload(id, error) {
 }
 
 function buildFileList(files, share, currentPath, computer) {
-    let html = '';
+    let html = '<ul class="space-y-0">';
     files.forEach(file => {
         const isDirectory = file.is_directory;
         const fileIcon = getFileIcon(file.name, isDirectory);
@@ -760,7 +760,7 @@ function buildFileList(files, share, currentPath, computer) {
                 data-computer="${computer}"
                 data-share="${share}"
                 title="${file.name}">
-                <div class="grid grid-cols-12 gap-4 items-center hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded cursor-pointer py-0.5 px-2">
+                <div class="grid grid-cols-12 gap-4 items-center hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded cursor-pointer">
                     <div class="col-span-6">
                         <div class="flex items-center gap-2 min-w-0" style="margin-left: ${marginLeft}rem;">
                             ${fileIcon.isCustomSvg 
@@ -783,24 +783,24 @@ function buildFileList(files, share, currentPath, computer) {
                     <div class="col-span-1 flex items-center gap-2 justify-end">
                         ${isDirectory ? `
                             <button class="upload-btn text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300" title="Upload">
-                                <i class="fas fa-upload"></i>
+                                <i class="fas fa-upload fa-xs"></i>
                             </button>
                             <button class="new-folder-btn text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300" title="New Folder">
-                                <i class="fas fa-folder-plus"></i>
+                                <i class="fas fa-folder-plus fa-xs"></i>
                             </button>
                             <button class="download-btn text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300" title="Download Directory">
-                                <i class="fas fa-download"></i>
+                                <i class="fas fa-download fa-xs"></i>
                             </button>
                         ` : `
                             <button class="view-btn text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300" title="View">
-                                <i class="fas fa-eye"></i>
+                                <i class="fas fa-eye fa-xs"></i>
                             </button>
                             <button class="download-btn text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300" title="Download">
-                                <i class="fas fa-download"></i>
+                                <i class="fas fa-download fa-xs"></i>
                             </button>
                         `}
                         <button class="delete-btn text-neutral-500 hover:text-red-600 dark:hover:text-red-400" title="Delete">
-                            <i class="fas fa-trash"></i>
+                            <i class="fas fa-trash fa-xs"></i>
                         </button>
                     </div>
                 </div>
@@ -808,6 +808,7 @@ function buildFileList(files, share, currentPath, computer) {
             </li>
         `;
     });
+    html += '</ul>';
     return html;
 }
 

@@ -3085,7 +3085,8 @@ function getFileIcon(fileName, isDirectory) {
     }
 
     // Check for jpg file extension
-    if (fileExt === '.jpg') {
+    const jpgExtensions = ['.jpg', '.jpeg'];
+    if (jpgExtensions.includes(fileExt)) {
         return {
             icon: icons.jpgIcon,
             iconClass: '',
@@ -3094,7 +3095,8 @@ function getFileIcon(fileName, isDirectory) {
     }
 
     // Check for png file extension
-    if (fileExt === '.png') {
+    const pngExtensions = ['.png'];
+    if (pngExtensions.includes(fileExt)) {
         return {
             icon: icons.pngIcon,
             iconClass: '',
