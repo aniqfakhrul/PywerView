@@ -476,10 +476,12 @@ class APIServer:
 				domain, username = username.replace('/', '\\').split('\\')
 			
 			if not computer:
+				logging.error(f"[SMB Connect] Computer name/IP is required: {computer}")
 				return jsonify({'error': 'Computer name/IP is required'}), 400
 
 			if self.powerview.use_kerberos:
 				if is_ipaddress(computer):
+					logging.error(f"[SMB Connect] FQDN must be used for kerberos authentication: {computer}")
 					return jsonify({'error': 'FQDN must be used for kerberos authentication'}), 400
 			else:
 				if is_valid_fqdn(computer):
@@ -487,8 +489,9 @@ class APIServer:
 												use_system_ns=self.powerview.use_system_nameserver)
 				else:
 					host = computer
-
+			
 			if not host:
+				logging.error(f"[SMB Connect] Host not found: {host}")
 				return jsonify({'error': 'Host not found'}), 404
 
 			# Pass optional credentials to init_smb_session
@@ -502,16 +505,18 @@ class APIServer:
 			)
 			
 			if not client:
+				logging.error(f"[SMB Connect] Failed to connect to {host}")
 				return jsonify({'error': f'Failed to connect to {host}'}), 400
 
 			# Store SMB client in session
 			if not hasattr(self, 'smb_sessions'):
 				self.smb_sessions = {}
-			self.smb_sessions[host] = client
+			self.smb_sessions[computer] = client
 
+			logging.info(f"[SMB Connect] Connected to {host}")
 			return jsonify({
 				'status': 'connected',
-				'host': host
+				'host': computer
 			})
 
 		except Exception as e:

@@ -61,6 +61,19 @@
             </div>
         </div>
 
+        <!-- Add loading indicator template (initially hidden) -->
+        <div id="tab-loading-template" class="hidden">
+            <div class="flex items-center gap-2 px-4 py-2 text-sm font-medium text-neutral-500 dark:text-neutral-400 border-b-2 border-transparent">
+                <i class="fas fa-computer"></i>
+                <span class="tab-computer-name"></span>
+                <div class="animate-pulse flex space-x-1">
+                    <div class="h-1 w-1 bg-current rounded-full"></div>
+                    <div class="h-1 w-1 bg-current rounded-full"></div>
+                    <div class="h-1 w-1 bg-current rounded-full"></div>
+                </div>
+            </div>
+        </div>
+
         <!-- Table Headers -->
         <div class="px-4 py-0.5 border-b border-neutral-200 dark:border-neutral-700 grid grid-cols-12">
             <div class="col-span-6 text-sm font-medium text-neutral-500 dark:text-neutral-400">Name</div>

@@ -48,12 +48,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 connectionData.password = password;
             }
 
-            // Connect to SMB
-            await connectToSMB(connectionData);
-            const shares = await listSMBShares(computer);
-            
             // Add new PC tab
             addPCTab(computer);
+
+            // Connect to SMB
+            const response = await connectToSMB(connectionData, false);
+            if (response.error) {
+                disconnectPC(computer);
+                throw new Error(response.error);
+            }
+
+            const shares = await listSMBShares(computer);
             
             // Add new PC view
             addPCView(computer, shares);
@@ -283,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Reuse the existing SMB functions from main.js
-async function connectToSMB(data) {
+async function connectToSMB(data, raiseError = true) {
     const response = await fetch('/api/smb/connect', {
         method: 'POST',
         headers: {
@@ -293,8 +298,12 @@ async function connectToSMB(data) {
     });
 
     if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error || 'Failed to connect to SMB share');
+        if (raiseError) {
+            const error = await response.json();
+            throw new Error(error.error || 'Failed to connect to SMB share');
+        } else {
+            return response.json();
+        }
     }
 
     return response.json();

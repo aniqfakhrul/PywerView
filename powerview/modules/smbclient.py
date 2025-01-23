@@ -63,8 +63,11 @@ class SMBClient:
         fh = BytesIO()
         try:
             self.client.getFile(share, ntpath.normpath(path), fh.write)
-            return fh.getvalue()
+            data = fh.getvalue()
+            fh.close()
+            return data
         except:
+            fh.close()
             raise
         finally:
             fh.close()

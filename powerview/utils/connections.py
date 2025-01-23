@@ -446,7 +446,8 @@ class CONNECTION:
 				"msDS-SupportedEncryptionTypes": LDAP.resolve_enc_type,
 				"trustAttributes": TRUST.resolve_trustAttributes,
 				"trustType": TRUST.resolve_trustType,
-				"trustDirection": TRUST.resolve_trustDirection
+				"trustDirection": TRUST.resolve_trustDirection,
+				"ms-Mcs-AdmPwdExpirationTime": LDAP.ldap2datetime
 			}
 		}
 
@@ -518,7 +519,8 @@ class CONNECTION:
 				"msDS-SupportedEncryptionTypes": LDAP.resolve_enc_type,
 				"trustAttributes": TRUST.resolve_trustAttributes,
 				"trustType": TRUST.resolve_trustType,
-				"trustDirection": TRUST.resolve_trustDirection
+				"trustDirection": TRUST.resolve_trustDirection,
+				"ms-Mcs-AdmPwdExpirationTime": LDAP.ldap2datetime
 			}
 		}
 
@@ -614,7 +616,8 @@ class CONNECTION:
 				"msDS-SupportedEncryptionTypes": LDAP.resolve_enc_type,
 				"trustAttributes": TRUST.resolve_trustAttributes,
 				"trustType": TRUST.resolve_trustType,
-				"trustDirection": TRUST.resolve_trustDirection
+				"trustDirection": TRUST.resolve_trustDirection,
+				"ms-Mcs-AdmPwdExpirationTime": LDAP.ldap2datetime
 			}
 		}
 
